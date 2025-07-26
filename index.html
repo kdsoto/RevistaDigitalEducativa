@@ -1,0 +1,2428 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Revista Digital Educativa | Estándares Educativos UCE</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #6366f1;
+      --primary-dark: #4f46e5;
+      --secondary: #10b981;
+      --accent: #f59e0b;
+      --bg-light: #f8fafc;
+      --bg-dark: #0f172a;
+      --text-primary: #1e293b;
+      --text-secondary: #64748b;
+      --white: #ffffff;
+      --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+      --gradient-hero: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+      --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+      --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+      --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      line-height: 1.6;
+      color: var(--text-primary);
+      overflow-x: hidden;
+    }
+
+    /* Navbar mejorada */
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      z-index: 1000;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .navbar.scrolled {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 800;
+      background: var(--gradient-1);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: -0.025em;
+    }
+
+    .nav-menu {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .nav-menu a {
+      text-decoration: none;
+      color: var(--text-primary);
+      font-weight: 500;
+      position: relative;
+      padding: 0.5rem 0;
+      transition: all 0.3s ease;
+    }
+
+    .nav-menu a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--gradient-1);
+      transition: width 0.3s ease;
+    }
+
+    .nav-menu a:hover::after {
+      width: 100%;
+    }
+
+    /* Hero Section Espectacular */
+    .hero {
+      min-height: 100vh;
+      background: var(--gradient-hero);
+      position: relative;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><radialGradient id="a" cx="50%" cy="50%" r="50%"><stop offset="0%" style="stop-color:rgba(255,255,255,0.1)"/><stop offset="100%" style="stop-color:rgba(255,255,255,0)"/></radialGradient></defs><circle cx="200" cy="200" r="300" fill="url(%23a)"/><circle cx="800" cy="300" r="200" fill="url(%23a)"/><circle cx="400" cy="700" r="250" fill="url(%23a)"/></svg>') no-repeat center center;
+      background-size: cover;
+      opacity: 0.3;
+    }
+
+    .hero-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-text h1 {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 900;
+      color: white;
+      margin-bottom: 1.5rem;
+      line-height: 1.1;
+      text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      animation: fadeInUp 1s ease-out;
+    }
+
+    .hero-text p {
+      font-size: 1.125rem;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 1.5rem;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      animation: fadeInUp 1s ease-out 0.2s both;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2rem;
+      animation: fadeInUp 1s ease-out 0.4s both;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.5s;
+    }
+
+    .btn:hover::before {
+      left: 100%;
+    }
+
+    .btn-primary {
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(10px);
+    }
+
+    .btn-primary:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: translateY(-2px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: white;
+      border: 2px solid rgba(255, 255, 255, 0.5);
+    }
+
+    .btn-outline:hover {
+      background: white;
+      color: var(--primary);
+      transform: translateY(-2px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Hero Visual - Tarjetas Flotantes Mejoradas */
+    .hero-visual {
+      position: relative;
+      height: 500px;
+      animation: fadeInRight 1s ease-out 0.6s both;
+    }
+
+    .floating-card {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 20px;
+      padding: 2rem;
+      text-align: center;
+      color: white;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .floating-card:nth-child(1) {
+      top: 20px;
+      left: 50px;
+      animation-delay: 0s;
+    }
+
+    .floating-card:nth-child(2) {
+      top: 180px;
+      right: 80px;
+      animation-delay: 2s;
+    }
+
+    .floating-card:nth-child(3) {
+      bottom: 50px;
+      left: 20px;
+      animation-delay: 4s;
+    }
+
+    .floating-card:hover {
+      transform: translateY(-10px) scale(1.05);
+      box-shadow: 0 35px 70px rgba(0, 0, 0, 0.3);
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    .floating-card h4 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .floating-card p {
+      font-size: 0.875rem;
+      opacity: 0.9;
+    }
+
+    .floating-card i {
+      display: block;
+      margin-bottom: 1rem;
+      filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+    }
+
+    /* Animaciones */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInRight {
+      from {
+        opacity: 0;
+        transform: translateX(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-20px);
+      }
+    }
+
+    /* Partículas de fondo */
+    .particles {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .particle {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      animation: particle-float 15s infinite linear;
+    }
+
+    .particle:nth-child(1) {
+      width: 10px;
+      height: 10px;
+      left: 10%;
+      animation-delay: 0s;
+    }
+
+    .particle:nth-child(2) {
+      width: 6px;
+      height: 6px;
+      left: 20%;
+      animation-delay: 2s;
+    }
+
+    .particle:nth-child(3) {
+      width: 8px;
+      height: 8px;
+      left: 30%;
+      animation-delay: 4s;
+    }
+
+    .particle:nth-child(4) {
+      width: 12px;
+      height: 12px;
+      left: 40%;
+      animation-delay: 6s;
+    }
+
+    .particle:nth-child(5) {
+      width: 4px;
+      height: 4px;
+      left: 50%;
+      animation-delay: 8s;
+    }
+
+    .particle:nth-child(6) {
+      width: 14px;
+      height: 14px;
+      left: 60%;
+      animation-delay: 10s;
+    }
+
+    .particle:nth-child(7) {
+      width: 8px;
+      height: 8px;
+      left: 70%;
+      animation-delay: 12s;
+    }
+
+    .particle:nth-child(8) {
+      width: 6px;
+      height: 6px;
+      left: 80%;
+      animation-delay: 14s;
+    }
+
+    .particle:nth-child(9) {
+      width: 10px;
+      height: 10px;
+      left: 90%;
+      animation-delay: 16s;
+    }
+
+    @keyframes particle-float {
+      0% {
+        top: 100vh;
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      90% {
+        opacity: 1;
+      }
+      100% {
+        top: -10vh;
+        opacity: 0;
+      }
+    }
+
+    /* Sección de Autores */
+    .authors-section {
+      padding: 6rem 0;
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .authors-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:rgba(99,102,241,0.05)"/><stop offset="100%" style="stop-color:rgba(16,185,129,0.05)"/></linearGradient></defs><polygon points="0,0 1000,300 1000,1000 0,700" fill="url(%23grad1)"/></svg>') no-repeat center center;
+      background-size: cover;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      color: var(--text-primary);
+      margin-bottom: 1rem;
+      background: var(--gradient-1);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .section-subtitle {
+      font-size: 1.125rem;
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* Carrusel de Autores */
+    .carousel-container {
+      position: relative;
+      max-width: 100%;
+      overflow: hidden;
+    }
+
+    .carousel-wrapper {
+      overflow: hidden;
+      border-radius: 20px;
+    }
+
+    .carousel-track {
+      display: flex;
+      transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      gap: 2rem;
+      padding: 1rem 0;
+    }
+
+    .author-card {
+      min-width: 360px;
+      height: 480px;
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .author-card:hover {
+      transform: translateY(-10px) scale(1.02);
+    }
+
+    .card-background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--gradient-1);
+      opacity: 0.9;
+      transition: all 0.4s ease;
+    }
+
+    .card-background.tutor-card {
+      background: var(--gradient-2);
+    }
+
+    .author-card:hover .card-background {
+      opacity: 1;
+      transform: scale(1.05);
+    }
+
+    .author-content {
+      position: relative;
+      z-index: 2;
+      height: 100%;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      color: white;
+    }
+
+    .author-avatar {
+      position: relative;
+      width: 80px;
+      height: 80px;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .avatar-ring {
+      position: absolute;
+      top: -10px;
+      left: -10px;
+      right: -10px;
+      bottom: -10px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      animation: rotate 10s linear infinite;
+    }
+
+    .avatar-ring.tutor-ring {
+      border-color: rgba(255, 215, 0, 0.5);
+      border-width: 3px;
+    }
+
+    .author-avatar i {
+      font-size: 2.5rem;
+      color: white;
+      filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+    }
+
+    .author-name {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .author-role {
+      font-size: 0.875rem;
+      color: rgba(255, 255, 255, 0.8);
+      margin-bottom: 1rem;
+      font-weight: 500;
+    }
+
+    .author-description {
+      flex: 1;
+      overflow-y: auto;
+      margin-bottom: 1.5rem;
+      max-height: 200px;
+    }
+
+    .author-description::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    .author-description::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 2px;
+    }
+
+    .author-description::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 2px;
+    }
+
+    .author-description p {
+      font-size: 0.875rem;
+      line-height: 1.5;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .author-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      text-decoration: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 25px;
+      font-weight: 600;
+      font-size: 0.875rem;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .author-link:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Controles del Carrusel */
+    .carousel-controls {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 -2rem;
+      pointer-events: none;
+      z-index: 3;
+    }
+
+    .carousel-btn {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.9);
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      pointer-events: auto;
+      backdrop-filter: blur(20px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    }
+
+    .carousel-btn:hover {
+      background: white;
+      transform: scale(1.1);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    .carousel-btn i {
+      color: var(--primary);
+      font-size: 1.25rem;
+    }
+
+    .prev-btn {
+      margin-left: -25px;
+    }
+
+    .next-btn {
+      margin-right: -25px;
+    }
+
+    /* Indicadores del Carrusel */
+    .carousel-indicators {
+      display: flex;
+      justify-content: center;
+      gap: 0.75rem;
+      margin-top: 2rem;
+    }
+
+    .indicator {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: rgba(99, 102, 241, 0.3);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .indicator.active {
+      background: var(--primary);
+      transform: scale(1.2);
+    }
+
+    .indicator::after {
+      content: '';
+      position: absolute;
+      top: -4px;
+      left: -4px;
+      right: -4px;
+      bottom: -4px;
+      border: 2px solid transparent;
+      border-radius: 50%;
+      transition: all 0.3s ease;
+    }
+
+    .indicator.active::after {
+      border-color: var(--primary);
+      opacity: 0.3;
+    }
+
+    @keyframes rotate {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* Sección de Estándares */
+    .standards-section {
+      padding: 6rem 0;
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .standards-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><radialGradient id="glow1" cx="30%" cy="30%"><stop offset="0%" style="stop-color:rgba(99,102,241,0.1)"/><stop offset="100%" style="stop-color:transparent"/></radialGradient><radialGradient id="glow2" cx="70%" cy="70%"><stop offset="0%" style="stop-color:rgba(16,185,129,0.1)"/><stop offset="100%" style="stop-color:transparent"/></radialGradient></defs><circle cx="300" cy="300" r="400" fill="url(%23glow1)"/><circle cx="700" cy="700" r="300" fill="url(%23glow2)"/></svg>') no-repeat center center;
+      background-size: cover;
+      opacity: 0.5;
+    }
+
+    .standards-section .section-title {
+      color: white;
+      background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .standards-section .section-subtitle {
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    /* Estadísticas */
+    .stats-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin: 4rem 0;
+    }
+
+    .stats-item {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 20px;
+      padding: 2rem;
+      text-align: center;
+      transition: all 0.4s ease;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    .stats-item.animate-in {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .stats-item:hover {
+      transform: translateY(-10px);
+      background: rgba(255, 255, 255, 0.15);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .stats-icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 1rem;
+      background: var(--gradient-1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      color: white;
+    }
+
+    .stats-number {
+      font-size: 3rem;
+      font-weight: 900;
+      color: white;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    .stats-label {
+      font-size: 1rem;
+      color: rgba(255, 255, 255, 0.8);
+      font-weight: 500;
+    }
+
+    /* Grid de Estándares */
+    .standards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 4rem;
+    }
+
+    .standard-card {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      opacity: 0;
+      transform: translateY(50px);
+    }
+
+    .standard-card.animate-in {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .standard-card:hover {
+      transform: translateY(-10px) scale(1.02);
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .card-glow {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--gradient-1);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .standard-card:hover .card-glow {
+      opacity: 0.1;
+    }
+
+    .standard-icon {
+      width: 60px;
+      height: 60px;
+      background: var(--gradient-1);
+      border-radius: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      font-size: 1.5rem;
+      color: white;
+      position: relative;
+      z-index: 2;
+    }
+
+    .standard-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 1rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .standard-description {
+      color: rgba(255, 255, 255, 0.8);
+      line-height: 1.6;
+      position: relative;
+      z-index: 2;
+    }
+
+    .card-accent {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--gradient-1);
+      transform: scaleX(0);
+      transition: transform 0.4s ease;
+    }
+
+    .standard-card:hover .card-accent {
+      transform: scaleX(1);
+    }
+
+    /* Tarjetas especiales */
+    .importance-card .standard-icon { background: var(--gradient-1); }
+    .equity-card .standard-icon { background: var(--gradient-2); }
+    .improvement-card .standard-icon { background: var(--gradient-3); }
+    .future-card .standard-icon { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+
+    /* Dimensiones */
+    .dimension-card {
+      position: relative;
+    }
+
+    .dimension-badge {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      width: 40px;
+      height: 40px;
+      background: var(--gradient-1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      color: white;
+      font-size: 1.25rem;
+    }
+
+    .dimension-a .dimension-badge { background: var(--gradient-1); }
+    .dimension-b .dimension-badge { background: var(--gradient-2); }
+    .dimension-c .dimension-badge { background: var(--gradient-3); }
+    .dimension-d .dimension-badge { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+
+    /* Sección de Conclusiones */
+    .conclusions-section {
+      padding: 6rem 0;
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+      position: relative;
+    }
+
+    /* Gráfico de Resultados */
+    .results-chart {
+      background: white;
+      border-radius: 20px;
+      padding: 2rem;
+      margin: 3rem 0;
+      box-shadow: var(--shadow-xl);
+      border: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .chart-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 2rem;
+      color: var(--text-primary);
+    }
+
+    .chart-bars {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .bar-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .bar {
+      flex: 1;
+      height: 50px;
+      border-radius: 25px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1.5rem;
+      color: white;
+      font-weight: 600;
+      transition: all 0.4s ease;
+    }
+
+    .bar::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: var(--width, 0%);
+      background: inherit;
+      transition: width 1.5s ease;
+      opacity: 0.8;
+    }
+
+    .bar-label, .bar-percentage {
+      position: relative;
+      z-index: 2;
+    }
+
+    .bar.excellent { background: linear-gradient(135deg, #10b981 0%, #059669 100%); }
+    .bar.good { background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%); }
+    .bar.satisfactory { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); }
+    .bar.insufficient { background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); }
+
+    /* Grid de Conclusiones */
+    .conclusions-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 4rem;
+    }
+
+    .conclusion-card {
+      background: white;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      transition: all 0.4s ease;
+      opacity: 0;
+      transform: translateY(30px);
+      border: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .conclusion-card.animate-in {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .conclusion-card:hover {
+      transform: translateY(-10px);
+      box-shadow: var(--shadow-xl);
+    }
+
+    .card-header {
+      padding: 2rem 2rem 0;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .card-icon {
+      width: 50px;
+      height: 50px;
+      background: var(--gradient-1);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      color: white;
+    }
+
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin: 0;
+    }
+
+    .card-content {
+      padding: 1.5rem 2rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .card-footer {
+      padding: 0 2rem 2rem;
+    }
+
+    /* Barras de progreso */
+    .progress-indicator {
+      width: 100%;
+      height: 8px;
+      background: rgba(0, 0, 0, 0.1);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 100%;
+      background: var(--gradient-1);
+      border-radius: 4px;
+      width: 0%;
+      transition: width 2s ease;
+    }
+
+    /* Estadísticas de tecnología */
+    .tech-stats {
+      margin-top: 1.5rem;
+    }
+
+    .tech-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .tech-label {
+      min-width: 80px;
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+
+    .tech-bar {
+      flex: 1;
+      height: 8px;
+      background: rgba(0, 0, 0, 0.1);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .tech-fill {
+      height: 100%;
+      background: var(--gradient-2);
+      border-radius: 4px;
+      width: 0%;
+      transition: width 1.5s ease;
+    }
+
+    .tech-value {
+      min-width: 40px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    /* Lista de recomendaciones */
+    .recommendations-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .recommendations-list li {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+      padding: 0.75rem;
+      background: rgba(99, 102, 241, 0.05);
+      border-radius: 10px;
+      transition: all 0.3s ease;
+    }
+
+    .recommendations-list li:hover {
+      background: rgba(99, 102, 241, 0.1);
+      transform: translateX(5px);
+    }
+
+    .recommendations-list i {
+      color: var(--secondary);
+      font-size: 1.125rem;
+    }
+
+    /* Elementos Ikigai */
+    .ikigai-elements {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+    }
+
+    .ikigai-item {
+      padding: 0.75rem;
+      border-radius: 10px;
+      text-align: center;
+      font-weight: 600;
+      font-size: 0.875rem;
+      color: white;
+      transition: all 0.3s ease;
+    }
+
+    .ikigai-item:hover {
+      transform: scale(1.05);
+    }
+
+    .ikigai-item.passion { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+    .ikigai-item.mission { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+    .ikigai-item.profession { background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); }
+    .ikigai-item.vocation { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); }
+
+    /* Tarjetas específicas */
+    .results-card .card-icon { background: var(--gradient-1); }
+    .technology-card .card-icon { background: var(--gradient-2); }
+    .recommendations-card .card-icon { background: var(--gradient-3); }
+    .ikigai-card .card-icon { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+
+    /* Footer */
+    .footer {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .footer-waves {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 120px;
+      overflow: hidden;
+      line-height: 0;
+    }
+
+    .footer-waves svg {
+      position: relative;
+      display: block;
+      width: calc(100% + 1.3px);
+      height: 120px;
+      fill: #f8fafc;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 3rem;
+      padding: 8rem 0 3rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .footer-section h3 {
+      margin-bottom: 1.5rem;
+    }
+
+    .main-section {
+      max-width: 400px;
+    }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-logo i {
+      width: 50px;
+      height: 50px;
+      background: var(--gradient-1);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+    }
+
+    .footer-logo span {
+      font-size: 1.5rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .footer-description {
+      color: rgba(255, 255, 255, 0.8);
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-date {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.875rem;
+    }
+
+    .footer-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+
+    .footer-title::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      width: 40px;
+      height: 3px;
+      background: var(--gradient-1);
+      border-radius: 2px;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .footer-link {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      color: rgba(255, 255, 255, 0.8);
+      text-decoration: none;
+      transition: all 0.3s ease;
+      padding: 0.5rem;
+      border-radius: 8px;
+    }
+
+    .footer-link:hover {
+      color: white;
+      background: rgba(255, 255, 255, 0.1);
+      transform: translateX(5px);
+    }
+
+    .footer-link i {
+      width: 20px;
+      color: var(--primary);
+    }
+
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .contact-item i {
+      width: 20px;
+      color: var(--secondary);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 2rem 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .footer-copyright {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.875rem;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .social-link {
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+
+    .social-link:hover {
+      background: var(--gradient-1);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Animaciones adicionales */
+    @keyframes countUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .stats-number.counting {
+      animation: countUp 0.5s ease;
+    }
+
+    /* Efectos de carga */
+    .section {
+      opacity: 0;
+      animation: fadeInSection 1s ease forwards;
+    }
+
+    @keyframes fadeInSection {
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* Scroll suave mejorado */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      .standard-card,
+      .conclusion-card,
+      .stats-item {
+        animation: none;
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .nav-container {
+        padding: 1rem;
+      }
+
+      .nav-menu {
+        gap: 1rem;
+      }
+
+      .hero-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 2rem;
+      }
+
+      .hero-visual {
+        height: 300px;
+      }
+
+      .floating-card {
+        padding: 1.5rem;
+      }
+
+      .floating-card:nth-child(2) {
+        right: 20px;
+      }
+
+      .authors-section {
+        padding: 4rem 0;
+      }
+
+      .author-card {
+        min-width: 300px;
+        height: 420px;
+      }
+
+      .carousel-btn {
+        width: 40px;
+        height: 40px;
+      }
+
+      .prev-btn, .next-btn {
+        margin: 0;
+      }
+
+      .standards-section,
+      .conclusions-section {
+        padding: 4rem 0;
+      }
+
+      .stats-container {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .standards-grid,
+      .conclusions-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .results-chart {
+        margin: 2rem 0;
+        padding: 1.5rem;
+      }
+
+      .footer-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 6rem 0 2rem;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .btn {
+        width: 100%;
+        justify-content: center;
+        max-width: 300px;
+      }
+
+      .author-card {
+        min-width: 280px;
+        height: 400px;
+      }
+
+      .author-content {
+        padding: 1.5rem;
+      }
+
+      .carousel-controls {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+<!-- Navbar -->
+<nav class="navbar" id="navbar">
+  <div class="nav-container">
+    <div class="logo">REVISTA EDUCATIVA</div>
+    <ul class="nav-menu">
+      <li><a href="#inicio">Inicio</a></li>
+      <li><a href="#autores">Autores</a></li>
+      <li><a href="#estandares">Estándares</a></li>
+      <li><a href="#conclusion">Conclusión</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero" id="inicio">
+  <!-- Partículas de fondo -->
+  <div class="particles">
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-text">
+      <h1>Revista Digital Educativa</h1>
+      <p>La revista educativa tiene como propósito difundir investigaciones, experiencias y propuestas pedagógicas que contribuyan a mejorar la calidad del sistema educativo, promoviendo el pensamiento crítico, la innovación en la enseñanza y fortaleciendo la formación docente a través de espacios de diálogo académico que impulsen el desarrollo profesional y la transformación pedagógica a nivel nacional e internacional.</p>
+
+      <p>El proceso de evaluación desarrollado consiste en analizar las planificaciones microcurriculares mediante una lista de cotejo basada en estándares y criterios de calidad, permitiendo verificar de forma rápida y objetiva si los docentes cumplen con los requisitos establecidos en diferentes dimensiones como el dominio disciplinar, la gestión del aprendizaje y el compromiso ético.</p>
+
+      <div class="cta-buttons">
+        <a href="#autores" class="btn btn-primary">
+          <i class="fas fa-users"></i>
+          Conoce al Equipo
+        </a>
+        <a href="#estandares" class="btn btn-outline">
+          <i class="fas fa-graduation-cap"></i>
+          Ver Estándares
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="floating-card">
+        <i class="fas fa-chalkboard-teacher" style="font-size: 2rem; color: #fbbf24;"></i>
+        <h4>Formación Docente</h4>
+        <p>Desarrollo profesional continuo</p>
+      </div>
+      <div class="floating-card">
+        <i class="fas fa-clipboard-check" style="font-size: 2rem; color: #34d399;"></i>
+        <h4>Evaluación</h4>
+        <p>Listas de cotejo especializadas</p>
+      </div>
+      <div class="floating-card">
+        <i class="fas fa-star" style="font-size: 2rem; color: #f59e0b;"></i>
+        <h4>Calidad Educativa</h4>
+        <p>Estándares nacionales</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Sección de Autores con Carrusel -->
+<section class="section authors-section" id="autores">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Nuestros Autores</h2>
+      <p class="section-subtitle">Equipo de estudiantes del sexto semestre de Ciencias de la Educación, bajo la tutoría del MSC. Luis Caizaluisa.</p>
+    </div>
+
+    <!-- Carrusel de Autores -->
+    <div class="carousel-container">
+      <div class="carousel-wrapper">
+        <div class="carousel-track" id="carousel-track">
+
+          <!-- Autor 1 -->
+          <div class="author-card">
+            <div class="card-background"></div>
+            <div class="author-content">
+              <div class="author-avatar">
+                <div class="avatar-ring"></div>
+                <i class="fas fa-user-graduate"></i>
+              </div>
+              <div class="author-info">
+                <h3 class="author-name">Guiselles Adriana Avellán Mendoza</h3>
+                <p class="author-role">Estudiante del sexto semestre</p>
+                <div class="author-description">
+                  <p>Soy Adriana Avellán, estudiante del sexto semestre comprometida con mi desarrollo académico y personal. Me defino como una persona perseverante, responsable y con una fuerte motivación por alcanzar mis metas. Mi etapa universitaria ha sido una oportunidad para descubrir mis fortalezas, enfrentar desafíos con resiliencia y mantener siempre la disposición de aprender y crecer.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Autor 2 -->
+          <div class="author-card">
+            <div class="card-background"></div>
+            <div class="author-content">
+              <div class="author-avatar">
+                <div class="avatar-ring"></div>
+                <i class="fas fa-chalkboard-teacher"></i>
+              </div>
+              <div class="author-info">
+                <h3 class="author-name">Luis Geovanny Recalde Soto</h3>
+                <p class="author-role">Estudiante del sexto semestre</p>
+                <div class="author-description">
+                  <p>Hola, soy Geovanny Recalde, estudiante universitario del sexto semestre. A lo largo de este camino académico he aprendido no solo contenidos teóricos, sino también valiosas lecciones de vida. Me considero alguien comprometido con lo que hace, con la capacidad de adaptarse y avanzar ante los desafíos. Esta etapa ha sido un espacio de descubrimiento personal, donde he desarrollado habilidades, reforzado valores y fortalecido mi vocación.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Autor 3 -->
+          <div class="author-card">
+            <div class="card-background"></div>
+            <div class="author-content">
+              <div class="author-avatar">
+                <div class="avatar-ring"></div>
+                <i class="fas fa-book-reader"></i>
+              </div>
+              <div class="author-info">
+                <h3 class="author-name">Diana Elizabeth Figueroa Vergara</h3>
+                <p class="author-role">Estudiante de Ciencias de la Educación</p>
+                <div class="author-description">
+                  <p>Mi nombre es Diana Elizabeth Figueroa Vergara, nací el 16 de febrero de 1993 en Quito, Ecuador. Actualmente soy estudiante de la carrera de Ciencias de la Educación en la Universidad Central del Ecuador. Desde niña, siempre me sentí motivada por aprender, leer y compartir conocimientos con otros, lo que despertó en mí una vocación por la enseñanza y el deseo de contribuir a una mejor sociedad a través de la educación.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Autor 4 -->
+          <div class="author-card">
+            <div class="card-background"></div>
+            <div class="author-content">
+              <div class="author-avatar">
+                <div class="avatar-ring"></div>
+                <i class="fas fa-basketball-ball"></i>
+              </div>
+              <div class="author-info">
+                <h3 class="author-name">Maricela Alejandrina Pallo Panamá</h3>
+                <p class="author-role">Estudiante de Educación</p>
+                <div class="author-description">
+                  <p>Nací el 06 de diciembre en Quito, en el seno de una familia. Desde pequeña, me caractericé por ser alegre, juguetona y muy sociable. En la escuela, destacé en mis estudios fui una de las mejores alumnas con diplomas cada año. Más tarde, al entrar en colegio, descubrí mi pasión por jugar baloncesto, fuimos campeonas los tres años consecutivos. Aspiro dejar una huella en mi comunidad y ser feliz con lo que hago.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Autor 5 -->
+          <div class="author-card">
+            <div class="card-background"></div>
+            <div class="author-content">
+              <div class="author-avatar">
+                <div class="avatar-ring"></div>
+                <i class="fas fa-feather-alt"></i>
+              </div>
+              <div class="author-info">
+                <h3 class="author-name">Angélica Dayana Tepú Hernández</h3>
+                <p class="author-role">Estudiante de Educación</p>
+                <div class="author-description">
+                  <p>Nací en Ibarra el 29 de enero de 2004 y desde pequeña he cultivado habilidades como la responsabilidad y el liderazgo. A pesar de los desafíos, mi resiliencia me ha impulsado, y mi pasión por la lengua y literatura, junto con mi creatividad, son herramientas clave que uso para aprender y para lo que será mi labor como maestra. La dedicación y el esfuerzo que veo en mi madre me inspiran profundamente.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tutor -->
+          <div class="author-card">
+            <div class="card-background tutor-card"></div>
+            <div class="author-content">
+              <div class="author-avatar">
+                <div class="avatar-ring tutor-ring"></div>
+                <i class="fas fa-user-tie"></i>
+              </div>
+              <div class="author-info">
+                <h3 class="author-name">MSC. Luis Caizaluisa</h3>
+                <p class="author-role">Tutor Académico</p>
+                <div class="author-description">
+                  <p>Tutor académico de la carrera de Educación Básica en la Universidad Central del Ecuador. Guía el desarrollo profesional de futuros docentes comprometidos con la calidad educativa y la implementación de estándares nacionales.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Controles del carrusel -->
+      <div class="carousel-controls">
+        <button class="carousel-btn prev-btn" id="prevBtn">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="carousel-btn next-btn" id="nextBtn">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+      </div>
+
+      <!-- Indicadores -->
+      <div class="carousel-indicators" id="indicators">
+        <span class="indicator active" data-slide="0"></span>
+        <span class="indicator" data-slide="1"></span>
+        <span class="indicator" data-slide="2"></span>
+        <span class="indicator" data-slide="3"></span>
+        <span class="indicator" data-slide="4"></span>
+        <span class="indicator" data-slide="5"></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Sección de Estándares -->
+<section class="section standards-section" id="estandares">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Estándares Educativos: Pilares para la Calidad en el Aula</h2>
+      <p class="section-subtitle">Marcos de referencia que describen lo que los estudiantes deben saber y ser capaces de hacer en diferentes etapas de su aprendizaje.</p>
+    </div>
+
+    <!-- Estadísticas destacadas -->
+    <div class="stats-container">
+      <div class="stats-item">
+        <div class="stats-icon">
+          <i class="fas fa-chart-line"></i>
+        </div>
+        <div class="stats-number" data-target="85">0</div>
+        <div class="stats-label">% Mejora en Calidad</div>
+      </div>
+      <div class="stats-item">
+        <div class="stats-icon">
+          <i class="fas fa-users"></i>
+        </div>
+        <div class="stats-number" data-target="1200">0</div>
+        <div class="stats-label">Docentes Evaluados</div>
+      </div>
+      <div class="stats-item">
+        <div class="stats-icon">
+          <i class="fas fa-star"></i>
+        </div>
+        <div class="stats-number" data-target="4">0</div>
+        <div class="stats-label">Dimensiones Clave</div>
+      </div>
+    </div>
+
+    <div class="standards-grid">
+      <!-- Importancia de los estándares -->
+      <div class="standard-card importance-card">
+        <div class="card-glow"></div>
+        <div class="standard-icon">
+          <i class="fas fa-bullseye"></i>
+        </div>
+        <h3 class="standard-title">Claridad y Coherencia</h3>
+        <p class="standard-description">Proporcionan una visión unificada de los objetivos de aprendizaje, asegurando que todos los actores del sistema educativo comprendan qué se espera.</p>
+        <div class="card-accent"></div>
+      </div>
+
+      <div class="standard-card equity-card">
+        <div class="card-glow"></div>
+        <div class="standard-icon">
+          <i class="fas fa-balance-scale"></i>
+        </div>
+        <h3 class="standard-title">Equidad Educativa</h3>
+        <p class="standard-description">Establecen un piso común de conocimientos y habilidades para todos los estudiantes, reduciendo brechas educativas y garantizando acceso a educación de calidad.</p>
+        <div class="card-accent"></div>
+      </div>
+
+      <div class="standard-card improvement-card">
+        <div class="card-glow"></div>
+        <div class="standard-icon">
+          <i class="fas fa-chart-line"></i>
+        </div>
+        <h3 class="standard-title">Mejora Continua</h3>
+        <p class="standard-description">Sirven como herramienta para la rendición de cuentas y la mejora constante del sistema educativo.</p>
+        <div class="card-accent"></div>
+      </div>
+
+      <div class="standard-card future-card">
+        <div class="card-glow"></div>
+        <div class="standard-icon">
+          <i class="fas fa-rocket"></i>
+        </div>
+        <h3 class="standard-title">Preparación para el Futuro</h3>
+        <p class="standard-description">Los estándares modernos se enfocan en habilidades del siglo XXI como creatividad, comunicación y colaboración, preparando estudiantes para un mundo en cambio.</p>
+        <div class="card-accent"></div>
+      </div>
+
+      <!-- Dimensiones clave -->
+      <div class="standard-card dimension-card dimension-a">
+        <div class="card-glow"></div>
+        <div class="standard-icon">
+          <i class="fas fa-book"></i>
+        </div>
+        <h3 class="standard-title">Dimensión A: Dominio Disciplinar</h3>
+        <p class="standard-description">Evalúa el conocimiento profundo del área que enseña, incluyendo teorías, investigaciones, epistemología y relación con otras disciplinas.</p>
+        <div class="dimension-badge">A</div>
+      </div>
+
+      <div class="standard-card dimension-card dimension-b">
+        <div class="card-glow"></div>
+        <div class="standard-icon">
+          <i class="fas fa-tasks"></i>
+        </div>
+        <h3 class="standard-title">Dimensión B: Gestión del Aprendizaje</h3>
+        <p class="standard-description">Capacidad para planificar procesos de enseñanza con objetivos claros, recursos didácticos apropiados y evaluaciones alineadas.</p>
+        <div class="dimension-badge">B</div>
+      </div>
+
+      <div class="standard-card dimension-card dimension-c">
+        <div class="card-glow"></div>
+        <div class="standard-icon">
+          <i class="fas fa-graduation-cap"></i>
+        </div>
+        <h3 class="standard-title">Dimensión C: Desarrollo Profesional</h3>
+        <p class="standard-description">Participación en procesos de actualización continua, investigación y colaboración con la comunidad educativa.</p>
+        <div class="dimension-badge">C</div>
+      </div>
+
+      <div class="standard-card dimension-card dimension-d">
+        <div class="card-glow"></div>
+        <div class="standard-icon">
+          <i class="fas fa-hand-holding-heart"></i>
+        </div>
+        <h3 class="standard-title">Dimensión D: Compromiso Ético</h3>
+        <p class="standard-description">Compromiso con la promoción de valores, derechos y expectativas altas, respetando la diversidad estudiantil.</p>
+        <div class="dimension-badge">D</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Sección de Conclusiones -->
+<section class="section conclusions-section" id="conclusion">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Conclusión y Recomendaciones</h2>
+      <p class="section-subtitle">Hallazgos clave y propuestas para mejorar la calidad educativa</p>
+    </div>
+
+    <!-- Gráfico de resultados -->
+    <div class="results-chart">
+      <div class="chart-container">
+        <div class="chart-title">Distribución de Evaluaciones</div>
+        <div class="chart-bars">
+          <div class="bar-item">
+            <div class="bar excellent" data-value="20">
+              <span class="bar-label">Excelente</span>
+              <span class="bar-percentage">20%</span>
+            </div>
+          </div>
+          <div class="bar-item">
+            <div class="bar good" data-value="50">
+              <span class="bar-label">Buena</span>
+              <span class="bar-percentage">50%</span>
+            </div>
+          </div>
+          <div class="bar-item">
+            <div class="bar satisfactory" data-value="20">
+              <span class="bar-label">Satisfactoria</span>
+              <span class="bar-percentage">20%</span>
+            </div>
+          </div>
+          <div class="bar-item">
+            <div class="bar insufficient" data-value="10">
+              <span class="bar-label">Insuficiente</span>
+              <span class="bar-percentage">10%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="conclusions-grid">
+      <div class="conclusion-card results-card">
+        <div class="card-header">
+          <div class="card-icon">
+            <i class="fas fa-chart-pie"></i>
+          </div>
+          <h3 class="card-title">Resultados de la Evaluación</h3>
+        </div>
+        <div class="card-content">
+          <p>El análisis de 12 planificaciones microcurriculares reveló que el 50% son "Buenas", 20% "Satisfactorias", 20% "Excelentes" y 10% "Insuficientes". Se observó predominio de metodologías tradicionales (70%) frente a innovadoras (30%).</p>
+        </div>
+        <div class="card-footer">
+          <div class="progress-indicator">
+            <div class="progress-bar" data-progress="70"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="conclusion-card technology-card">
+        <div class="card-header">
+          <div class="card-icon">
+            <i class="fas fa-laptop"></i>
+          </div>
+          <h3 class="card-title">Uso de Tecnología</h3>
+        </div>
+        <div class="card-content">
+          <p>Recursos tradicionales predominan (80%), tecnológicos se usan en 45% y digitales en 30%. Se recomienda mayor integración de tecnología educativa.</p>
+          <div class="tech-stats">
+            <div class="tech-item">
+              <span class="tech-label">Tradicional</span>
+              <div class="tech-bar">
+                <div class="tech-fill" data-width="80"></div>
+              </div>
+              <span class="tech-value">80%</span>
+            </div>
+            <div class="tech-item">
+              <span class="tech-label">Tecnológico</span>
+              <div class="tech-bar">
+                <div class="tech-fill" data-width="45"></div>
+              </div>
+              <span class="tech-value">45%</span>
+            </div>
+            <div class="tech-item">
+              <span class="tech-label">Digital</span>
+              <div class="tech-bar">
+                <div class="tech-fill" data-width="30"></div>
+              </div>
+              <span class="tech-value">30%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="conclusion-card recommendations-card">
+        <div class="card-header">
+          <div class="card-icon">
+            <i class="fas fa-lightbulb"></i>
+          </div>
+          <h3 class="card-title">Recomendaciones Clave</h3>
+        </div>
+        <div class="card-content">
+          <ul class="recommendations-list">
+            <li><i class="fas fa-check-circle"></i> Incorporar metodologías innovadoras</li>
+            <li><i class="fas fa-check-circle"></i> Diversificar estrategias de evaluación</li>
+            <li><i class="fas fa-check-circle"></i> Mayor formación en TIC</li>
+            <li><i class="fas fa-check-circle"></i> Planificación contextualizada</li>
+            <li><i class="fas fa-check-circle"></i> Autoevaluación docente</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="conclusion-card ikigai-card">
+        <div class="card-header">
+          <div class="card-icon">
+            <i class="fas fa-heart"></i>
+          </div>
+          <h3 class="card-title">Ikigai Docente</h3>
+        </div>
+        <div class="card-content">
+          <p>La integración del Modelo Ikigai y el autoanálisis permiten a los docentes identificar sus habilidades, intereses y motivaciones, fortaleciendo su vocación y compromiso con la enseñanza.</p>
+          <div class="ikigai-elements">
+            <div class="ikigai-item passion">Pasión</div>
+            <div class="ikigai-item mission">Misión</div>
+            <div class="ikigai-item profession">Profesión</div>
+            <div class="ikigai-item vocation">Vocación</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer" id="contacto">
+  <div class="footer-waves">
+    <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+      <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25"></path>
+      <path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5"></path>
+      <path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z"></path>
+    </svg>
+  </div>
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-section main-section">
+        <div class="footer-logo">
+          <i class="fas fa-graduation-cap"></i>
+          <span>Revista Digital Educativa</span>
+        </div>
+        <p class="footer-description">Difundiendo investigaciones y propuestas pedagógicas para mejorar la calidad del sistema educativo.</p>
+        <div class="footer-date">
+          <i class="far fa-calendar-alt"></i>
+          <span>Fecha: 20/07/2025</span>
+        </div>
+      </div>
+
+      <div class="footer-section">
+        <h3 class="footer-title">Recursos Educativos</h3>
+        <div class="footer-links">
+          <a href="https://docs.google.com/document/d/1Phgx8GEH1ZAiroa_rMslvDykIoZaYtiY/edit" target="_blank" class="footer-link">
+            <i class="fas fa-list-check"></i>
+            <span>Lista de cotejo</span>
+          </a>
+          <a href="https://www.canva.com/design/DAGpDyH-FLE/ZsYZrJLz4vggQtt5u8bCQQ/edit" target="_blank" class="footer-link">
+            <i class="fas fa-user-check"></i>
+            <span>Autoevaluación docente</span>
+          </a>
+          <a href="https://educacion.gob.ec" target="_blank" class="footer-link">
+            <i class="fas fa-external-link-alt"></i>
+            <span>Ministerio de Educación</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-section">
+        <h3 class="footer-title">Contacto Institucional</h3>
+        <div class="contact-info">
+          <div class="contact-item">
+            <i class="fas fa-university"></i>
+            <span>Universidad Central del Ecuador</span>
+          </div>
+          <div class="contact-item">
+            <i class="fas fa-graduation-cap"></i>
+            <span>Carrera de Educación Básica</span>
+          </div>
+          <div class="contact-item">
+            <i class="fas fa-user-tie"></i>
+            <span>Tutor: MSC. Luis Caizaluisa</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-copyright">
+        <p>&copy; 2025 Revista Digital Educativa - Universidad Central del Ecuador. Todos los derechos reservados.</p>
+      </div>
+      <div class="footer-social">
+        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // JavaScript para navbar scroll
+  window.addEventListener('scroll', function() {
+    const navbar = document.getElementById('navbar');
+    if (window.scrollY > 50) {
+      navbar.classList.add('scrolled');
+    } else {
+      navbar.classList.remove('scrolled');
+    }
+  });
+
+  // Smooth scrolling para los enlaces del navbar
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    });
+  });
+
+  // Carrusel de Autores
+  class AuthorCarousel {
+    constructor() {
+      this.track = document.getElementById('carousel-track');
+      this.prevBtn = document.getElementById('prevBtn');
+      this.nextBtn = document.getElementById('nextBtn');
+      this.indicators = document.querySelectorAll('.indicator');
+      this.cards = document.querySelectorAll('.author-card');
+      this.currentSlide = 0;
+      this.totalSlides = this.cards.length;
+      this.cardWidth = 380; // ancho de cada card + gap
+
+      this.init();
+    }
+
+    init() {
+      this.updateCarousel();
+      this.addEventListeners();
+      this.startAutoPlay();
+    }
+
+    addEventListeners() {
+      this.prevBtn.addEventListener('click', () => this.prevSlide());
+      this.nextBtn.addEventListener('click', () => this.nextSlide());
+
+      this.indicators.forEach((indicator, index) => {
+        indicator.addEventListener('click', () => this.goToSlide(index));
+      });
+
+      // Pausar autoplay en hover
+      this.track.addEventListener('mouseenter', () => this.stopAutoPlay());
+      this.track.addEventListener('mouseleave', () => this.startAutoPlay());
+    }
+
+    nextSlide() {
+      this.currentSlide = (this.currentSlide + 1) % this.totalSlides;
+      this.updateCarousel();
+    }
+
+    prevSlide() {
+      this.currentSlide = (this.currentSlide - 1 + this.totalSlides) % this.totalSlides;
+      this.updateCarousel();
+    }
+
+    goToSlide(index) {
+      this.currentSlide = index;
+      this.updateCarousel();
+    }
+
+    updateCarousel() {
+      const offset = -this.currentSlide * this.cardWidth;
+      this.track.style.transform = `translateX(${offset}px)`;
+
+      // Actualizar indicadores
+      this.indicators.forEach((indicator, index) => {
+        indicator.classList.toggle('active', index === this.currentSlide);
+      });
+    }
+
+    startAutoPlay() {
+      this.autoPlayInterval = setInterval(() => {
+        this.nextSlide();
+      }, 5000);
+    }
+
+    stopAutoPlay() {
+      if (this.autoPlayInterval) {
+        clearInterval(this.autoPlayInterval);
+      }
+    }
+  }
+
+  // Inicializar carrusel cuando el DOM esté listo
+  document.addEventListener('DOMContentLoaded', () => {
+    new AuthorCarousel();
+
+    // Intersection Observer para animaciones
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-in');
+
+          // Animaciones específicas
+          if (entry.target.classList.contains('stats-item')) {
+            animateStatsNumbers(entry.target);
+          }
+
+          if (entry.target.classList.contains('results-chart')) {
+            animateChart();
+          }
+
+          if (entry.target.classList.contains('conclusion-card')) {
+            animateProgressBars(entry.target);
+          }
+        }
+      });
+    }, observerOptions);
+
+    // Observar elementos para animación
+    document.querySelectorAll('.standard-card, .conclusion-card, .stats-item, .results-chart').forEach(el => {
+      observer.observe(el);
+    });
+
+    // Animación de números estadísticos
+    function animateStatsNumbers(statsItem) {
+      const numberElement = statsItem.querySelector('.stats-number');
+      const target = parseInt(numberElement.dataset.target);
+      let current = 0;
+      const increment = target / 50;
+      const timer = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+          current = target;
+          clearInterval(timer);
+        }
+        numberElement.textContent = Math.floor(current);
+        numberElement.classList.add('counting');
+      }, 40);
+    }
+
+    // Animación del gráfico de barras
+    function animateChart() {
+      setTimeout(() => {
+        document.querySelectorAll('.bar').forEach(bar => {
+          const value = bar.dataset.value;
+          bar.style.setProperty('--width', value + '%');
+        });
+      }, 500);
+    }
+
+    // Animación de barras de progreso
+    function animateProgressBars(card) {
+      setTimeout(() => {
+        const progressBar = card.querySelector('.progress-bar');
+        if (progressBar) {
+          const progress = progressBar.dataset.progress;
+          progressBar.style.width = progress + '%';
+        }
+
+        const techFills = card.querySelectorAll('.tech-fill');
+        techFills.forEach(fill => {
+          const width = fill.dataset.width;
+          fill.style.width = width + '%';
+        });
+      }, 300);
+    }
+
+    // Efecto parallax suave para el hero
+    window.addEventListener('scroll', () => {
+      const scrolled = window.pageYOffset;
+      const hero = document.querySelector('.hero');
+      const heroContent = document.querySelector('.hero-content');
+
+      if (hero && scrolled < hero.offsetHeight) {
+        hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+        heroContent.style.transform = `translateY(${scrolled * 0.2}px)`;
+      }
+    });
+
+    // Efectos de hover mejorados para las tarjetas
+    document.querySelectorAll('.standard-card, .conclusion-card').forEach(card => {
+      card.addEventListener('mouseenter', function() {
+        this.style.transform = 'translateY(-10px) scale(1.02)';
+      });
+
+      card.addEventListener('mouseleave', function() {
+        this.style.transform = 'translateY(0) scale(1)';
+      });
+    });
+
+    // Smooth scroll mejorado para navegación
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          const offsetTop = target.offsetTop - 80; // Ajuste para navbar fija
+          window.scrollTo({
+            top: offsetTop,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+
+    // Activar/desactivar indicadores del navbar
+    window.addEventListener('scroll', () => {
+      const sections = document.querySelectorAll('section[id]');
+      const navLinks = document.querySelectorAll('.nav-menu a');
+
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 100;
+        const sectionHeight = section.clientHeight;
+        if (pageYOffset >= sectionTop && pageYOffset < sectionTop + sectionHeight) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${current}`) {
+          link.classList.add('active');
+        }
+      });
+    });
+
+    // Lazy loading para imágenes y contenido pesado
+    if ('IntersectionObserver' in window) {
+      const lazyObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const element = entry.target;
+
+            // Cargar contenido lazy
+            if (element.dataset.src) {
+              element.src = element.dataset.src;
+              element.removeAttribute('data-src');
+            }
+
+            lazyObserver.unobserve(element);
+          }
+        });
+      });
+
+      document.querySelectorAll('[data-src]').forEach(element => {
+        lazyObserver.observe(element);
+      });
+    }
+
+    // Efectos de typing para títulos importantes
+    function typeWriter(element, text, speed = 100) {
+      let i = 0;
+      element.innerHTML = '';
+      function typing() {
+        if (i < text.length) {
+          element.innerHTML += text.charAt(i);
+          i++;
+          setTimeout(typing, speed);
+        }
+      }
+      typing();
+    }
+
+    // Preloader simple
+    window.addEventListener('load', () => {
+      document.body.classList.add('loaded');
+
+      // Iniciar animaciones después de la carga
+      setTimeout(() => {
+        document.querySelectorAll('.section').forEach((section, index) => {
+          setTimeout(() => {
+            section.style.animationDelay = `${index * 0.2}s`;
+          }, index * 100);
+        });
+      }, 500);
+    });
+
+    // Gestión de errores para enlaces externos
+    document.querySelectorAll('a[target="_blank"]').forEach(link => {
+      link.addEventListener('click', function(e) {
+        try {
+          // Verificar si el enlace es válido antes de abrir
+          if (!this.href || this.href === '#') {
+            e.preventDefault();
+            console.warn('Enlace no válido:', this.href);
+          }
+        } catch (error) {
+          console.error('Error al abrir enlace:', error);
+          e.preventDefault();
+        }
+      });
+    });
+
+    // Easter egg - Konami Code
+    let konamiCode = [];
+    const konamiSequence = [
+      'ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown',
+      'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight',
+      'KeyB', 'KeyA'
+    ];
+
+    document.addEventListener('keydown', function(e) {
+      konamiCode.push(e.code);
+      if (konamiCode.length > konamiSequence.length) {
+        konamiCode.shift();
+      }
+
+      if (konamiCode.join('') === konamiSequence.join('')) {
+        // Easter egg activado
+        document.body.style.filter = 'hue-rotate(180deg)';
+        setTimeout(() => {
+          document.body.style.filter = '';
+        }, 3000);
+
+        // Mostrar mensaje especial
+        const message = document.createElement('div');
+        message.textContent = '🎉 ¡Easter egg activado! ¡Excelente trabajo explorando!';
+        message.style.cssText = `
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 20px;
+            font-weight: bold;
+            z-index: 10000;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            backdrop-filter: blur(20px);
+          `;
+        document.body.appendChild(message);
+
+        setTimeout(() => {
+          message.remove();
+        }, 3000);
+
+        konamiCode = [];
+      }
+    });
+  });
+</script>
+</body>
+</html>
